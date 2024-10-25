@@ -4,7 +4,7 @@ class WEBPImageConverter extends ImageConverter {
     constructor(options: ImageConverterOptions) {
         super(options);
     }
-    public async convert() {
+    public convert(): Promise<Blob> {
         return super.convert(ImageType.WEBP);
     }
 }
@@ -13,7 +13,7 @@ class PNGImageConverter extends ImageConverter {
     constructor(options: ImageConverterOptions) {
         super(options);
     }
-    public async convert() {
+    public convert(): Promise<Blob> {
         return super.convert(ImageType.PNG);
     }
 }
