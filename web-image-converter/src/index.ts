@@ -1,4 +1,4 @@
-import { ImageConverter } from "./ImageConverter";
+import { ImageConverter, ImageConverterOptions, ImageType } from "./ImageConverter";
 
 class WEBPImageConverter extends ImageConverter {
     constructor(options: ImageConverterOptions) {

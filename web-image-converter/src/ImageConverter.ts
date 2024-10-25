@@ -1,3 +1,17 @@
+export enum ImageType {
+    JPEG = "jpeg",
+    PNG = "png",
+    WEBP = "webp",
+}
+
+export type ImageConverterOptions = {
+    source: string;
+    width?: number;
+    height?: number;
+    quality?: number;
+    imageType?: ImageType;
+};
+
 export class ImageConverter {
     protected width: number | undefined;
     protected height: number | undefined;
