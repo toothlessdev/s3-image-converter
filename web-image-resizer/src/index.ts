@@ -12,24 +12,22 @@ export class ImageResizer {
             reader.onload = (event) => {
                 const image = new Image();
                 image.src = event.target?.result as string;
-                image.onload = (e) => {
+                image.onload = () => {
                     const canvas = document.createElement("canvas");
                     const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
                     let width = image.width;
                     let height = image.height;
 
-                    if (width > height) {
-                        if (width > options.maxWidth) {
-                            height *= options.maxWidth / width;
-                            width = options.maxWidth;
-                        }
-                    } else {
-                        if (height > options.maxHeight) {
-                            width *= options.maxHeight / height;
-                            height = options.maxHeight;
-                        }
+                    const widthRatio = options.maxWidth / width;
+                    const heightRatio = options.maxHeight / height;
+                    const ratio = Math.min(widthRatio, heightRatio);
+
+                    if (ratio < 1) {
+                        width *= ratio;
+                        height *= ratio;
                     }
+
                     canvas.width = width;
                     canvas.height = height;
 
@@ -42,9 +40,9 @@ export class ImageResizer {
                         options.quality
                     );
                 };
-                image.onerror = () => reject(new Error("Failed to load image."));
+                image.onerror = () => reject(new Error("이미지를 불러오는데 실패했습니다."));
             };
-            reader.onerror = () => reject(new Error("Failed to read file."));
+            reader.onerror = () => reject(new Error("파일을 읽는데 실패했습니다."));
             reader.readAsDataURL(options.file);
         });
     }
