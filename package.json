@@ -1,0 +1,19 @@
+{
+    "name": "s3-image-converter",
+    "version": "1.0.0",
+    "main": "index.js",
+    "repository": "https://github.com/toothlessdev/s3-image-converter.git",
+    "author": "toothlessdev <toothless042@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "workspaces": [
+        "image-converter",
+        "image-resizer"
+    ],
+    "scripts": {
+        "image-converter": "yarn workspace image-converter"
+    },
+    "devDependencies": {
+        "autoprefixer": "^10.4.20"
+    }
+}
