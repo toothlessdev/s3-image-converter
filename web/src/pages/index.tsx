@@ -25,6 +25,7 @@ export default function Index() {
     const { sizes, handleSizeChange, addSize, removeSize } = useSize();
 
     const [bucket, setBucket] = useState("your-bucket-name");
+    const [bucketDir, setBucketDir] = useState("images");
     const { region, setRegion, regions } = useRegion("ap-northeast-2");
     const { getPresignedUrl } = usePresignedURL(presignedServerUrl, region, bucket);
 
@@ -33,7 +34,7 @@ export default function Index() {
 
         const [width, height] = size.split("x");
         const fileName = `${file.name.split(".")[0]}_${width}x${height}.${format}`;
-        const objectKey = `images/${fileName}`;
+        const objectKey = `${bucketDir ? bucketDir + "/" : ""}${fileName}`;
 
         const presignedUrl = await getPresignedUrl(objectKey);
 
@@ -74,7 +75,7 @@ export default function Index() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="space-y-2">
-                        <Label htmlFor="presignedServerUrl">프리사인드 URL 서버 엔드포인트</Label>
+                        <Label htmlFor="presignedServerUrl">S3 Presigned URL 발급 서버 엔드포인트</Label>
                         <Input
                             id="presignedServerUrl"
                             value={presignedServerUrl}
@@ -100,6 +101,10 @@ export default function Index() {
                     <div className="space-y-2">
                         <Label htmlFor="bucket">S3 버킷 이름</Label>
                         <Input id="bucket" value={bucket} onChange={(e) => setBucket(e.target.value)} placeholder="버킷 이름을 입력하세요" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="bucket-dir">S3 버킷 하위 디렉토리 경로 (루트 경로에 저장시 비워두세요)</Label>
+                        <Input id="bucket-dir" value={bucketDir} onChange={(e) => setBucketDir(e.target.value)} placeholder="버킷내에 저장할 하위 디렉토리를 입력해주세요" />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="files">이미지 선택</Label>
