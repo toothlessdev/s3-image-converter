@@ -1,0 +1,11 @@
+{
+    "name": "presigned-url",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "type": "commonjs",
+    "scripts": {
+        "start:cli": "node src/cli.js",
+        "start:server": "node src/server.js"
+    }
+}
