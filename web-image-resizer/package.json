@@ -1,0 +1,12 @@
+{
+    "name": "web-image-resizer",
+    "version": "1.0.0",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "license": "MIT",
+    "scripts": {
+        "compile": "tsc",
+        "compile:watch": "tsc --watch",
+        "build": "rollup --config rollup.config.mjs"
+    }
+}
