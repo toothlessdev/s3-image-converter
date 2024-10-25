@@ -1,0 +1,10 @@
+{
+    "name": "image-converter",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "compile": "tsc",
+        "compile:watch": "tsc --watch"
+    }
+}
