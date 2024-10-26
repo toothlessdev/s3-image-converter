@@ -16,22 +16,23 @@ export class ImageResizer {
                     const canvas = document.createElement("canvas");
                     const context = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-                    let width = image.width;
-                    let height = image.height;
+                    const originalWidth = image.width;
+                    const originalHeight = image.height;
 
-                    const widthRatio = options.maxWidth / width;
-                    const heightRatio = options.maxHeight / height;
-                    const ratio = Math.min(widthRatio, heightRatio);
+                    const widthRatio = options.maxWidth / originalWidth;
+                    const heightRatio = options.maxHeight / originalHeight;
+                    const ratio = Math.max(widthRatio, heightRatio);
 
-                    if (ratio < 1) {
-                        width *= ratio;
-                        height *= ratio;
-                    }
+                    const newWidth = originalWidth * ratio;
+                    const newHeight = originalHeight * ratio;
 
-                    canvas.width = width;
-                    canvas.height = height;
+                    canvas.width = options.maxWidth;
+                    canvas.height = options.maxHeight;
 
-                    context.drawImage(image, 0, 0, width, height);
+                    const x = (options.maxWidth - newWidth) / 2;
+                    const y = (options.maxHeight - newHeight) / 2;
+
+                    context.drawImage(image, x, y, newWidth, newHeight);
                     canvas.toBlob(
                         (data) => {
                             resolve(data as Blob);
